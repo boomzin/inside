@@ -36,13 +36,12 @@ public class AuthenticationController {
     @ResponseBody
     @PostMapping()
     public ResponseEntity login(@RequestBody AuthenticationRequestDto requestDto) {
+        String username = requestDto.getUsername();
+        Sender sender = senderRepository
+                .findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("Sender with username: " + username + " not found"));
         try {
-            String username = requestDto.getUsername();
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, requestDto.getPassword()));
-            Sender sender = senderRepository
-                    .findByUsername(username)
-                    .orElseThrow(() -> new UsernameNotFoundException("User with username: " + username + " not found"));
-
 
             String token = jwtTokenProvider.createToken(username);
 
@@ -52,7 +51,7 @@ public class AuthenticationController {
 
             return ResponseEntity.ok(response);
         } catch (AuthenticationException e) {
-            throw new BadCredentialsException("Invalid username or password");
+            throw new BadCredentialsException("Invalid password for sender " + username);
         }
     }
 }

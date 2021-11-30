@@ -22,7 +22,7 @@ public class Message extends AbstractBaseEntity {
     @Column(name = "message_datetime", nullable = false, columnDefinition = "timestamp(0) default now()")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
     @NotNull
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime dateTime;
 
     @Column(name = "message")
