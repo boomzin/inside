@@ -12,18 +12,30 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "message")
-public class Message extends AbstractBaseEntity{
+public class Message extends AbstractBaseEntity {
+
+    public Sender getUsername() {
+        return username;
+    }
+
+    public LocalDateTime getDateTime() {
+        return dateTime;
+    }
+
+    public String getMessage() {
+        return message;
+    }
 
     @ManyToOne
     @JsonBackReference
-    private Sender username ;
+    private Sender username;
 
     @Column(name = "message_datetime")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
     @NotNull
     private LocalDateTime dateTime;
 
-    @Column(name = "body")
+    @Column(name = "message")
     @NotNull
-    private String body;
+    private String message;
 }

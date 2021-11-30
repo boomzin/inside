@@ -12,7 +12,20 @@ import java.util.List;
 
 @Entity
 @Table(name = "sender")
-public class Sender extends AbstractBaseEntity{
+public class Sender extends AbstractBaseEntity {
+
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public List<Message> getMessages() {
+        return messages;
+    }
 
     @Column(name = "username", nullable = false, unique = true)
     @NotEmpty
