@@ -1,9 +1,9 @@
 INSERT INTO sender (username, password)
 VALUES ('user1', '$2a$04$DIfVsvfdxCvG/gAgWIEfAOP0Kx.lzZuNP30lClWU3FMaLo3615KTe'),
-       ('user2', 'user2pass'),
-       ('user3', 'user3pass');
+       ('user2', '$2a$04$Gf.nDfCkIg4Qm28M.V3lb.eAFSZgx6ikFPZMdfFORXzNBx5SOKNsa'),
+       ('user3', '$2a$04$MdlXzYIKj.3li0M8QDNfwejDA2b091x4M33H5q/voHgxQ8NRZ57P6');
 
-INSERT INTO message(username_id, message_datetime, message)
+INSERT INTO message(sender_id, message_datetime, message)
 VALUES (1, '2021-11-30 10:00:00', 'user1message1'),
        (1, '2021-11-30 10:00:01', 'user1message2'),
        (1, '2021-11-30 10:00:02', 'user1message3'),

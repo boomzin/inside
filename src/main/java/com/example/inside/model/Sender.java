@@ -37,7 +37,7 @@ public class Sender extends AbstractBaseEntity {
     @Size(min = 4, max = 256)
     private String password;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "username")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "sender")
     @OrderBy("dateTime DESC")
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonManagedReference

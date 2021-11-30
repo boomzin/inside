@@ -1,6 +1,7 @@
 package com.example.inside.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Column;
@@ -14,8 +15,22 @@ import java.time.LocalDateTime;
 @Table(name = "message")
 public class Message extends AbstractBaseEntity {
 
-    public Sender getUsername() {
-        return username;
+    @ManyToOne
+    @JsonBackReference
+    private Sender sender;
+
+    @Column(name = "message_datetime", nullable = false, columnDefinition = "timestamp(0) default now()")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
+    @NotNull
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
+    private LocalDateTime dateTime;
+
+    @Column(name = "message")
+    @NotNull
+    private String message;
+
+    public Sender getSender() {
+        return sender;
     }
 
     public LocalDateTime getDateTime() {
@@ -26,16 +41,15 @@ public class Message extends AbstractBaseEntity {
         return message;
     }
 
-    @ManyToOne
-    @JsonBackReference
-    private Sender username;
+    public void setSender(Sender sender) {
+        this.sender = sender;
+    }
 
-    @Column(name = "message_datetime")
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
-    @NotNull
-    private LocalDateTime dateTime;
+    public void setDateTime(LocalDateTime dateTime) {
+        this.dateTime = dateTime;
+    }
 
-    @Column(name = "message")
-    @NotNull
-    private String message;
+    public void setMessage(String message) {
+        this.message = message;
+    }
 }
