@@ -1,16 +1,16 @@
 package com.example.inside.dto;
 
 public class MessageDto {
-    private String username;
+    private String name;
     private String message;
 
-    public MessageDto(String username, String message) {
-        this.username = username;
+    public MessageDto(String name, String message) {
+        this.name = name;
         this.message = message;
     }
 
-    public String getUsername() {
-        return username;
+    public String getName() {
+        return name;
     }
 
     public String getMessage() {

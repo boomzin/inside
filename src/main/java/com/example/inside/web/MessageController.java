@@ -40,14 +40,14 @@ public class MessageController {
     public ResponseEntity getMessages(@RequestBody MessageDto messageDto, HttpServletRequest request) throws Exception {
         log.info("Post method in message controller");
         Sender sender = senderRepository
-                .findByUsername(messageDto.getUsername())
-                .orElseThrow(() -> new UsernameNotFoundException("User with username: " + messageDto.getUsername() + " not found"));
+                .findByUsername(messageDto.getName())
+                .orElseThrow(() -> new UsernameNotFoundException("User with username: " + messageDto.getName() + " not found"));
         String username = jwtTokenProvider.getUsername(jwtTokenProvider.resolveToken(request));
         if (!sender.getUsername().equalsIgnoreCase(username)) {
             throw new IllegalAccessException("Sender "
                     + username
                     + " cannot manage messages belonging to the "
-                    + messageDto.getUsername());
+                    + messageDto.getName());
         }
         if (messageDto.getMessage().toLowerCase().startsWith("history ")) {
             log.info("return history");

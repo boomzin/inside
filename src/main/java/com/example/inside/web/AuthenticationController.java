@@ -36,10 +36,10 @@ public class AuthenticationController {
     @ResponseBody
     @PostMapping()
     public ResponseEntity login(@RequestBody AuthenticationRequestDto requestDto) {
-        String username = requestDto.getUsername();
+        String username = requestDto.getName();
         Sender sender = senderRepository
                 .findByUsername(username)
-                .orElseThrow(() -> new UsernameNotFoundException("Sender with username: " + username + " not found"));
+                .orElseThrow(() -> new UsernameNotFoundException("Sender with name: " + username + " not found"));
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, requestDto.getPassword()));
 
